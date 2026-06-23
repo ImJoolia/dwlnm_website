@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DWL Architects & Planners | New Mexico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sand: #E8E0D0;
+    --clay: #B8956A;
+    --adobe: #C4785A;
+    --charcoal: #1E1C19;
+    --bone: #F5F0E8;
+    --sage: #7A8C6E;
+    --off-white: #FAF8F4;
+    --dark-brown: #2C1F14;
+    --mid: #6B5B4E;
+    --accent: #D4603A;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--charcoal);
+    color: var(--bone);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(30,28,25,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--bone);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--clay); }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.65);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--bone); }
+
+  .nav-cta {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bone);
+    text-decoration: none;
+    border: 1px solid rgba(245,240,232,0.35);
+    padding: 0.55rem 1.4rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .nav-cta:hover { background: rgba(245,240,232,0.1); border-color: var(--bone); }
+
+  /* HERO */
+  .hero {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6rem 3rem 5rem 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--bone);
+    margin-bottom: 2rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--clay);
+  }
+
+  .hero-desc {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.6);
+    max-width: 38ch;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .hero-actions { display: flex; gap: 1.5rem; align-items: center; }
+
+  .btn-primary {
+    background: var(--clay);
+    color: var(--dark-brown);
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1rem 2.2rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--adobe); }
+
+  .btn-ghost {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.6);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.6rem;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--bone); }
+  .btn-ghost::after { content: '→'; transition: transform 0.2s; }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75) saturate(0.85);
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--charcoal) 0%, transparent 20%);
+    z-index: 1;
+  }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2rem; left: 4rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-scroll-hint::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: rgba(245,240,232,0.25);
+    display: block;
+  }
+
+  /* MARQUEE */
+  .marquee-strip {
+    background: var(--clay);
+    padding: 0.9rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-flex; gap: 3rem;
+    animation: marquee 24s linear infinite;
+  }
+  .marquee-inner span {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dark-brown);
+    font-weight: 500;
+  }
+  .marquee-inner .dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: rgba(44,31,20,0.45);
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -2px;
+  }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ABOUT */
+  .section { padding: 7rem 4rem; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--bone);
+    margin-bottom: 2rem;
+  }
+  .section-title em { font-style: italic; color: var(--clay); }
+
+  .section-body {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: rgba(245,240,232,0.6);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .values-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+  .values-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.5;
+  }
+  .values-list li::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--clay);
+    flex-shrink: 0;
+    margin-top: 0.65em;
+  }
+
+  .about-image-stack {
+    position: relative;
+    height: 560px;
+  }
+  .about-image-stack img {
+    position: absolute;
+    object-fit: cover;
+    filter: brightness(0.85) saturate(0.8);
+  }
+  .about-image-stack .img-main {
+    width: 75%; height: 80%;
+    top: 0; right: 0;
+  }
+  .about-image-stack .img-accent {
+    width: 55%; height: 52%;
+    bottom: 0; left: 0;
+    border: 6px solid var(--charcoal);
+  }
+
+  /* SERVICES */
+  .services-section {
+    background: var(--bone);
+    padding: 7rem 4rem;
+  }
+  .services-section .section-label,
+  .services-section .section-title { color: var(--dark-brown); }
+  .services-section .section-title em { color: var(--adobe); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(44,31,20,0.12);
+    margin-top: 4rem;
+    border: 1px solid rgba(44,31,20,0.12);
+  }
+
+  .service-card {
+    background: var(--off-white);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: var(--dark-brown); }
+  .service-card:hover .service-title,
+  .service-card:hover .service-desc { color: var(--bone); }
+  .service-card:hover .service-num { color: rgba(245,240,232,0.15); }
+  .service-card:hover .service-link { color: var(--clay); }
+
+  .service-num {
+    font-family: var(--serif);
+    font-size: 4.5rem;
+    font-weight: 300;
+    color: rgba(44,31,20,0.08);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s;
+  }
+  .service-title {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--dark-brown);
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+    line-height: 1.2;
+  }
+  .service-desc {
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--mid);
+    font-weight: 300;
+    transition: color 0.3s;
+    margin-bottom: 1.5rem;
+  }
+  .service-link {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--adobe);
+    transition: color 0.3s;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .service-link::after { content: '→'; }
+
+  /* PROJECTS */
+  .projects-section { padding: 7rem 4rem; }
+  .projects-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1.5px;
+    background: rgba(245,240,232,0.06);
+  }
+
+  .project-tile {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .project-tile.tall { grid-row: span 2; }
+
+  .project-tile img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    min-height: 300px;
+    display: block;
+    transition: transform 0.6s ease, filter 0.4s;
+    filter: brightness(0.7) saturate(0.75);
+  }
+  .project-tile:hover img {
+    transform: scale(1.04);
+    filter: brightness(0.55) saturate(0.65);
+  }
+
+  .project-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(30,28,25,0.9) 0%, transparent 100%);
+    transform: translateY(8px);
+    transition: transform 0.3s;
+  }
+  .project-tile:hover .project-info { transform: translateY(0); }
+
+  .project-category {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 0.4rem;
+  }
+  .project-name {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--bone);
+    line-height: 1.2;
+  }
+  .project-location {
+    font-size: 0.78rem;
+    color: rgba(245,240,232,0.5);
+    margin-top: 0.3rem;
+  }
+
+  /* STATS */
+  .stats-section {
+    background: var(--adobe);
+    padding: 5rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .stat { text-align: center; }
+  .stat-number {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 300;
+    color: var(--bone);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.7);
+  }
+
+  /* AWARDS */
+  .awards-section { padding: 7rem 4rem; }
+  .awards-inner {
+    border-top: 1px solid rgba(245,240,232,0.1);
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+    padding: 4rem 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .awards-list { display: flex; flex-direction: column; gap: 2rem; }
+  .award-item {
+    padding-left: 1.5rem;
+    border-left: 2px solid rgba(245,240,232,0.1);
+    transition: border-color 0.2s;
+  }
+  .award-item:hover { border-left-color: var(--clay); }
+  .award-year {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 0.35rem;
+  }
+  .award-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--bone);
+    line-height: 1.3;
+    margin-bottom: 0.3rem;
+  }
+  .award-org {
+    font-size: 0.78rem;
+    color: rgba(245,240,232,0.45);
+    font-weight: 300;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--sand);
+    padding: 7rem 4rem;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .contact-section .section-label { color: var(--adobe); }
+  .contact-section .section-title { color: var(--dark-brown); }
+  .contact-section .section-title em { color: var(--adobe); }
+
+  .contact-detail {
+    margin-top: 2.5rem;
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .contact-item {}
+  .contact-item-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(44,31,20,0.5);
+    margin-bottom: 0.25rem;
+  }
+  .contact-item-value {
+    font-size: 0.9rem;
+    color: var(--dark-brown);
+    font-weight: 400;
+  }
+  .contact-item-value a {
+    color: var(--adobe);
+    text-decoration: none;
+  }
+  .contact-item-value a:hover { text-decoration: underline; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-field { display: flex; flex-direction: column; gap: 0.45rem; }
+  .form-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(44,31,20,0.55);
+  }
+  .form-input, .form-textarea, .form-select {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(44,31,20,0.15);
+    padding: 0.85rem 1rem;
+    color: var(--dark-brown);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    font-weight: 300;
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: var(--adobe);
+    background: white;
+  }
+  .form-textarea { resize: vertical; min-height: 120px; }
+
+  .form-submit {
+    align-self: flex-start;
+    background: var(--dark-brown);
+    color: var(--bone);
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { background: var(--adobe); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark-brown);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(245,240,232,0.07);
+  }
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--bone);
+    font-weight: 400;
+  }
+  .footer-logo span { color: var(--clay); }
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(245,240,232,0.3);
+  }
+  .footer-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .footer-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--bone); }
+
+  /* REVEAL ANIMATION */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.35s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; height: auto; }
+    .hero-right { height: 40vh; }
+    .hero-right::before { background: linear-gradient(to bottom, var(--charcoal) 0%, transparent 30%); }
+    .hero-left { padding: 8rem 1.5rem 3rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-image-stack { height: 320px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-tile.tall { grid-row: auto; }
+    .stats-section { grid-template-columns: repeat(2, 1fr); }
+    .awards-inner { grid-template-columns: 1fr; }
+    .section { padding: 4rem 1.5rem; }
+    .services-section, .contact-section, .awards-section, .projects-section { padding: 4rem 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .stats-section { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">DWL<span>|</span>NM</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#awards">Recognition</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Start a Project</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Albuquerque · New Mexico · Est. 1982</p>
+    <h1 class="hero-title">Architecture<br>Rooted in<br><em>New Mexico</em></h1>
+    <p class="hero-desc">We design buildings that honor the land, culture, and people of New Mexico — blending innovation with tradition to create spaces that endure.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Our Work</a>
+      <a href="#about" class="btn-ghost">Our Approach</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://dwlnm.com/wp-content/uploads/2024/03/RFK-Hero.jpg" alt="RFK Charter High School" onerror="this.src='https://dwlnm.com/wp-content/uploads/2024/03/DWL-Architects-Albuquerque-NM.jpg'">
+  </div>
+  <div class="hero-scroll-hint">Scroll to explore</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Commercial Architecture</span><span class="dot"></span>
+    <span>Public Works</span><span class="dot"></span>
+    <span>Educational Facilities</span><span class="dot"></span>
+    <span>Cultural Works</span><span class="dot"></span>
+    <span>Residential Design</span><span class="dot"></span>
+    <span>Historic Preservation</span><span class="dot"></span>
+    <span>Master Planning</span><span class="dot"></span>
+    <span>LEED Certified</span><span class="dot"></span>
+    <span>Community Development</span><span class="dot"></span>
+    <!-- duplicate for seamless loop -->
+    <span>Commercial Architecture</span><span class="dot"></span>
+    <span>Public Works</span><span class="dot"></span>
+    <span>Educational Facilities</span><span class="dot"></span>
+    <span>Cultural Works</span><span class="dot"></span>
+    <span>Residential Design</span><span class="dot"></span>
+    <span>Historic Preservation</span><span class="dot"></span>
+    <span>Master Planning</span><span class="dot"></span>
+    <span>LEED Certified</span><span class="dot"></span>
+    <span>Community Development</span><span class="dot"></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="about-grid">
+    <div>
+      <p class="section-label reveal">Who We Are</p>
+      <h2 class="section-title reveal reveal-delay-1">Form &amp; Function<br>in <em>Equal Parts</em></h2>
+      <p class="section-body reveal reveal-delay-2">DWL Architects &amp; Planners, Inc. is a local architecture firm deeply rooted in the community of Albuquerque, New Mexico. We collaborate closely with artists, historians, and cultural experts to ensure our designs authentically reflect the essence of our vibrant state.</p>
+      <p class="section-body reveal reveal-delay-2">Every building has a purpose — our emphasis on intentional design sets us apart, considering both form and function while delivering architectural services that exceed expectations.</p>
+      <ul class="values-list reveal reveal-delay-3">
+        <li>Useful and valuable — withstanding robust use and change over time</li>
+        <li>Inspiring spaces that energize those who inhabit them</li>
+        <li>Deeply rooted in the unique ecology and culture of New Mexico</li>
+        <li>Each project strengthens community through context and place</li>
+      </ul>
+    </div>
+    <div class="about-image-stack reveal">
+      <img class="img-main" src="https://dwlnm.com/wp-content/uploads/2024/03/Villa-Hispana-Stage.jpg" alt="Villa Hispana Expo NM" onerror="this.src='https://dwlnm.com/wp-content/uploads/2024/03/DWL-NM-Architecture.jpg'">
+      <img class="img-accent" src="https://dwlnm.com/wp-content/uploads/2024/03/MVD-Interior.jpg" alt="MVD Field Office Interior" onerror="this.src='https://dwlnm.com/wp-content/uploads/2024/03/DWL-NM-Office.jpg'">
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <p class="section-label reveal">What We Do</p>
+  <h2 class="section-title reveal reveal-delay-1">Our Areas of<br><em>Expertise</em></h2>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <h3 class="service-title">Commercial Architecture</h3>
+      <p class="service-desc">From law offices to company headquarters, we design commercial spaces that make optimal use of space while creating environments employees feel comfortable and motivated in.</p>
+      <span class="service-link">Explore</span>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <h3 class="service-title">Public Works</h3>
+      <p class="service-desc">Bold, beautiful structures that reinvest in our communities — delivering educational facilities, parks, public safety projects, and municipal developments across New Mexico.</p>
+      <span class="service-link">Explore</span>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <h3 class="service-title">Education Facilities</h3>
+      <p class="service-desc">Award-winning schools and campus designs that shape the future of education, creating environments for students, teachers, and communities to thrive together.</p>
+      <span class="service-link">Explore</span>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-num">04</div>
+      <h3 class="service-title">Cultural Works</h3>
+      <p class="service-desc">Preserving and celebrating New Mexico's rich cultural heritage through architecture that honors the past while serving as dynamic centers for expression and engagement.</p>
+      <span class="service-link">Explore</span>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">05</div>
+      <h3 class="service-title">Master Planning</h3>
+      <p class="service-desc">Comprehensive master plans for campuses, communities, and institutions — providing strategic frameworks that guide phased growth and development for years to come.</p>
+      <span class="service-link">Explore</span>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">06</div>
+      <h3 class="service-title">Residential Design</h3>
+      <p class="service-desc">Thoughtful residential projects that reflect the unique ecology and culture of New Mexico, creating homes that become part of the landscape and community fabric.</p>
+      <span class="service-link">Explore</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="projects-header">
+    <div>
+      <p class="section-label reveal">Selected Work</p>
+      <h2 class="section-title reveal reveal-delay-1">Featured<br><em>Projects</em></h2>
+    </div>
+    <a href="#contact" class="btn-ghost reveal" style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,240,232,0.5);text-decoration:none;display:flex;align-items:center;gap:0.6rem">View All Projects</a>
+  </div>
+  <div class="projects-grid">
+    <div class="project-tile tall reveal">
+      <img src="https://dwlnm.com/wp-content/uploads/2024/03/RFK-Charter-Exterior.jpg" alt="RFK Charter High School" style="min-height:580px;" onerror="this.src='https://dwlnm.com/wp-content/uploads/2024/03/RFK-Hero.jpg'">
+      <div class="project-info">
+        <p class="project-category">Education</p>
+        <h3 class="project-name">RFK Charter High School</h3>
+        <p class="project-location">South Valley, Albuquerque — 2015 ENR Southwest Best Project</p>
+      </div>
+    </div>
+    <div class="project-tile reveal">
+      <img src="https://dwlnm.com/wp-content/uploads/2024/03/Game-Fish-HQ.jpg" alt="NM Game and Fish HQ" style="min-height:260px;" onerror="this.src='https://dwlnm.com/wp-content/uploads/2024/03/NM-Game-Fish.jpg'">
+      <div class="project-info">
+        <p class="project-category">Public Works</p>
+        <h3 class="project-name">NM Dept. of Game &amp; Fish HQ</h3>
+        <p class="project-location">Santa Fe, New Mexico</p>
+      </div>
+    </div>
+    <div class="project-tile reveal reveal-delay-1">
+      <img src="https://dwlnm.com/wp-content/uploads/2024/03/MVD-Santa-Fe.jpg" alt="MVD Field Office Santa Fe" style="min-height:260px;" onerror="this.src='https://dwlnm.com/wp-content/uploads/2024/03/MVD-Interior.jpg'">
+      <div class="project-info">
+        <p class="project-category">Public Works</p>
+        <h3 class="project-name">NM Taxation &amp; Revenue MVD</h3>
+        <p class="project-location">Camino Entrada, Santa Fe</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stat reveal">
+    <div class="stat-number">40+</div>
+    <div class="stat-label">Years of Practice</div>
+  </div>
+  <div class="stat reveal reveal-delay-1">
+    <div class="stat-number">200+</div>
+    <div class="stat-label">Projects Completed</div>
+  </div>
+  <div class="stat reveal reveal-delay-2">
+    <div class="stat-number">15+</div>
+    <div class="stat-label">Design Awards</div>
+  </div>
+  <div class="stat reveal reveal-delay-3">
+    <div class="stat-number">LEED</div>
+    <div class="stat-label">Certified Projects</div>
+  </div>
+</div>
+
+<!-- AWARDS -->
+<section id="awards" class="awards-section">
+  <div class="awards-inner">
+    <div>
+      <p class="section-label reveal">Recognition</p>
+      <h2 class="section-title reveal reveal-delay-1">Award-Winning<br><em>Design</em></h2>
+      <p class="section-body reveal reveal-delay-2" style="margin-top:1rem">Our commitment to excellence in architecture has been recognized by leading industry organizations throughout New Mexico and the Southwest.</p>
+    </div>
+    <div class="awards-list">
+      <div class="award-item reveal">
+        <p class="award-year">2015</p>
+        <h3 class="award-title">Best K-12 Education Project — ENR Southwest Region</h3>
+        <p class="award-org">Engineering News-Record · RFK Charter High School, Albuquerque</p>
+      </div>
+      <div class="award-item reveal reveal-delay-1">
+        <p class="award-year">2012</p>
+        <h3 class="award-title">LEED for Schools — Gold Certification</h3>
+        <p class="award-org">U.S. Green Building Council · Grant Middle School, Albuquerque</p>
+      </div>
+      <div class="award-item reveal reveal-delay-2">
+        <p class="award-year">2012</p>
+        <h3 class="award-title">LEED Silver Certification</h3>
+        <p class="award-org">U.S. Green Building Council · Susie Rayos Marmon Elementary School</p>
+      </div>
+      <div class="award-item reveal reveal-delay-3">
+        <p class="award-year">Ongoing</p>
+        <h3 class="award-title">Art in Public Places Program Recognition</h3>
+        <p class="award-org">New Mexico Arts · NM Department of Cultural Affairs</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-grid">
+    <div>
+      <p class="section-label reveal">Get in Touch</p>
+      <h2 class="section-title reveal reveal-delay-1">Let's Build<br><em>Together</em></h2>
+      <p class="section-body reveal reveal-delay-2" style="color:rgba(44,31,20,0.6)">We establish a rapport with all our clients to ensure their satisfaction. Whether you're planning a new build or a renovation, we'd love to hear about your project.</p>
+      <div class="contact-detail reveal reveal-delay-3">
+        <div class="contact-item">
+          <p class="contact-item-label">Phone</p>
+          <p class="contact-item-value"><a href="tel:5052426202">(505) 242-6202</a></p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-item-label">Location</p>
+          <p class="contact-item-value">Albuquerque, New Mexico</p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-item-label">Service Area</p>
+          <p class="contact-item-value">Albuquerque · Bernalillo County · Las Cruces · Santa Fe · Statewide</p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-item-label">Website</p>
+          <p class="contact-item-value"><a href="https://dwlnm.com" target="_blank">dwlnm.com</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal reveal-delay-1">
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" placeholder="Jane">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" placeholder="Smith">
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" placeholder="jane@example.com">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Project Type</label>
+        <select class="form-select form-input">
+          <option value="">Select a service…</option>
+          <option>Commercial Architecture</option>
+          <option>Public Works</option>
+          <option>Education Facilities</option>
+          <option>Cultural Works</option>
+          <option>Master Planning</option>
+          <option>Residential Design</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Tell Us About Your Project</label>
+        <textarea class="form-textarea" placeholder="Describe your project, timeline, and goals…"></textarea>
+      </div>
+      <button class="form-submit">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">DWL<span>|</span>NM Architects &amp; Planners</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 DWL Architects &amp; Planners, Inc. · Albuquerque, NM</p>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
