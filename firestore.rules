@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Visitors need to read the questions to take the survey.
+    match /questions/{q} {
+      allow read: if true;
+      allow write: if true; // needed so the password-gated dashboard can edit questions
+    }
+
+    // Visitors submit responses; responses can be deleted from the
+    // staff dashboard, but never edited.
+    match /responses/{r} {
+      allow create: if true;
+      allow read: if true;   // needed so the dashboard can chart results
+      allow delete: if true; // needed so the dashboard can remove responses
+      allow update: if false;
+    }
+
+    // Stores the (hashed) team password.
+    match /meta/{doc} {
+      allow read, write: if true;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

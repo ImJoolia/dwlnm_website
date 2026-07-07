@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Staff Dashboard — SITE Survey 2026</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marqueeTrack"></div>
+  </div>
+
+  <header class="site-header">
+    <a class="logo-link" href="index.html"><img class="logo" src="assets/pda-logo.png" alt="Public Design Agency" /><span class="staff-badge">Staff</span></a>
+    <nav class="header-links">
+      <a class="btn btn--ghost btn--sm" href="index.html">View survey</a>
+      <button class="btn btn--sm" id="logoutBtn" hidden>Sign out</button>
+    </nav>
+  </header>
+
+  <!-- ============ LOGIN ============ -->
+  <main class="wrap" id="loginView">
+    <div class="card login-card">
+      <h2>Staff sign-in</h2>
+      <p class="hint" style="margin-top:-6px;">Enter the shared team password to open the dashboard.</p>
+      <div id="demoBannerLogin" class="banner" hidden>
+        <strong>Demo mode.</strong> Firebase isn't connected yet. Sign in with the default password <strong>yaypda</strong> to preview the dashboard with sample data.
+      </div>
+      <div id="setupCard" hidden>
+        <div class="banner banner--ok">
+          <strong>First-time setup.</strong> This database is empty. One click creates the team password (<strong>yaypda</strong>) and loads the 15 SITE Survey 2026 starter questions.
+        </div>
+        <button class="btn btn--sun" id="setupBtn" style="margin-bottom:18px;">Set up the database</button>
+      </div>
+      <form id="loginForm">
+        <div class="field">
+          <label for="passwordInput">Password</label>
+          <input type="password" id="passwordInput" autocomplete="current-password" />
+        </div>
+        <p id="loginError" class="q-error-msg" style="display:none;">That password didn't match. Try again.</p>
+        <button type="button" class="btn" id="signInBtn" style="margin-top:16px;">Sign in</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- ============ DASHBOARD ============ -->
+  <main class="wrap wrap--wide" id="dashView" hidden>
+    <section class="hero">
+      <h1>Survey dashboard</h1>
+      <p>See what visitors are saying, edit the questions, and manage the team password.</p>
+      <svg class="squiggle" viewBox="0 0 130 14" aria-hidden="true"><path d="M2 7c8-8 16 8 24 0s16 8 24 0 16 8 24 0 16 8 24 0 16 8 24 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+    </section>
+
+    <div id="demoBannerDash" class="banner" hidden>
+      <strong>Demo mode.</strong> The charts below use sample data. Connect Firebase (see README.md) to see real responses.
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-tab="results">Results</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="responses">Responses</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="builder">Questions</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="settings">Settings</button>
+    </div>
+
+    <!-- Results -->
+    <section id="tab-results">
+      <div class="stat-row" id="statRow"></div>
+      <div style="margin-bottom:22px; display:flex; gap:12px; flex-wrap:wrap;">
+        <button class="btn btn--ghost btn--sm" id="refreshBtn">Refresh results</button>
+        <button class="btn btn--sun btn--sm" id="exportBtn">Download CSV</button>
+      </div>
+      <div class="chart-grid" id="chartGrid"></div>
+    </section>
+
+    <!-- Individual responses -->
+    <section id="tab-responses" hidden>
+      <div class="banner">
+        Every submitted survey appears below, newest first. Open one to read its full answers, or remove it with the ✕ button. <strong>Deleting can't be undone</strong> — the CSV download on the Results tab is a good backup to grab first.
+      </div>
+      <div style="margin-bottom:22px; display:flex; gap:12px; flex-wrap:wrap;">
+        <button class="btn btn--ghost btn--sm" id="refreshRespBtn">Refresh list</button>
+        <button class="btn btn--danger btn--sm" id="deleteAllBtn">Delete ALL responses</button>
+        <span class="hint" id="respStatus" style="align-self:center;"></span>
+      </div>
+      <div id="respList"></div>
+    </section>
+
+    <!-- Question builder -->
+    <section id="tab-builder" hidden>
+      <div class="banner">
+        Changes here go live for visitors as soon as you press <strong>Save all questions</strong>. Answers already collected stay attached to their question.
+      </div>
+      <div id="builderList"></div>
+      <div class="builder-footer">
+        <button class="btn btn--ghost" id="addQuestionBtn">+ Add a question</button>
+        <button class="btn btn--ghost" id="addImageExampleBtn">+ Add the example image question</button>
+      </div>
+      <div class="save-bar">
+        <button class="btn btn--sm" id="saveQuestionsBtn">Save all questions</button>
+        <span class="hint" id="saveStatus"></span>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section id="tab-settings" hidden>
+      <div class="card" style="max-width:520px;">
+        <h3 style="font-family:var(--font-display); margin-top:0;">Change the team password</h3>
+        <p class="hint">Everyone on staff shares one password. Changing it here signs everyone in with the new one from now on.</p>
+        <div class="field" style="margin-bottom:14px;">
+          <label for="currentPw">Current password</label>
+          <input type="password" id="currentPw" autocomplete="current-password" />
+        </div>
+        <div class="field" style="margin-bottom:14px;">
+          <label for="newPw">New password</label>
+          <input type="password" id="newPw" autocomplete="new-password" />
+        </div>
+        <div class="field" style="margin-bottom:14px;">
+          <label for="newPw2">New password, again</label>
+          <input type="password" id="newPw2" autocomplete="new-password" />
+        </div>
+        <p id="pwMsg" class="hint"></p>
+        <button class="btn" id="changePwBtn">Update password</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    Staff dashboard · Public Design Agency · SITE Survey 2026
+  </footer>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
